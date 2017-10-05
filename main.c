@@ -41,6 +41,20 @@ int verifica_existencia(){
 	return 1; //Ambos os arquivos existem.
 }
 
+char *devolve_binario(int conta){
+	char binario[10], binarioAux[4];
+	binario="9999999999"
+	itoa(conta,binario,2); //Converte a conta para binario e armazena em char.
+	while(binario[i] != 9){
+		i++;
+	}
+	for(int j=0; j<i; j++){ //binarioAux recebe os 4 últimos digitos binários da conta
+		binarioAux[j] = binario[i-j];
+	}
+	printf("\nO valor %d em binario tem os ultimos 4 digitos: %s", conta, binarioAux)
+	return binarioAux;	
+}
+
 
 int criar_banco(){
 	printf("\nCriando banco de dados...");
@@ -69,10 +83,47 @@ int criar_banco(){
 		
 };
 
+int consultar(int conta, FILE* arquivo_clientes,FILE* arquivo_hash){
+	int profundidadeglobal, profundidadelocal, binario;
+	char binarioAux[4];
+	fscanf(arquivo_hash,"%d",&profundidadeglobal);	
+	binarioAux = devolve_binario(conta);
+	//binario = atoi(binarioAux);//converto o binario para inteiro (nao da certo)
+		
+	if (profundidadeglobal==2){ //A profundidade local é, obrigatoriamente, igual a 2 também.
+		if (binario == 0){
+			//Devo ler a linha 3 do arquivo_hash
+			
+		}
+		else if(binario == 1){
+			//Devo ler a linha 5 do arquivo_hash
+			
+		}
+		else if(binario == 10){
+			//Devo ler a linha 7 do arquivo_hash
+		}
+		else if (binario == 11){
+			//Devo ler a linha 9 do arquivo_hash
+		}
+	}
+	
+	else if(profundidadeglobal==3){
+		
+	}
+	
+	
+	else if(profundidadeglobal==4){
+	}
+	
+	
+	
+}
+
 
 
 void cadastra_cliente(FILE* arquivo_clientes,FILE* arquivo_hash){
 	int numlinha=0;
+	int ja_existe;
 	float numconta,contalim,contasaldo,conta,saldo,limite;
 	char nome[50],nomecliente[50];
 	fscanf(arquivo_hash,"%d",&profundidadeglobal);
@@ -80,6 +131,8 @@ void cadastra_cliente(FILE* arquivo_clientes,FILE* arquivo_hash){
 	printf("Digite o numero da conta\n");
 	scanf("%f",&conta);
 	//aqui entra uma das funções de hash
+	ja_existe = consultar(conta, arquivo_clientes, arquivo_hash);
+
 
 	printf("Digite o nome do cliente\n");
 	scanf("%s",nomecliente);
